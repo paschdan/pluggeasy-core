@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Select the Modbus connection the ventilation unit is reached through and its unit address.",
+        "data": {
+          "connection_entry_id": "Modbus connection",
+          "unit_id": "Modbus unit"
+        },
+        "data_description": {
+          "connection_entry_id": "The Modbus connection this ventilation unit is reached through.",
+          "unit_id": "The unit's Modbus station address (default 1)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect. Check that the ventilation unit is reachable on the selected connection and unit address."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "domain": "pluggeasy",
+  "name": "Pluggeasy",
+  "codeowners": ["@paschdan"],
+  "config_flow": true,
+  "dependencies": ["modbus_connection"],
+  "documentation": "https://www.home-assistant.io/integrations/pluggeasy",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "loggers": ["modbus_connection", "pluggeasy_modbus", "tmodbus"],
+  "quality_scale": "bronze",
+  "requirements": ["pluggeasy-modbus==0.1.0"]
+}
