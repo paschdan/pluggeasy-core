@@ -17,8 +17,10 @@ from .coordinator import PluggeasyConfigEntry, PluggeasyCoordinator
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
-    Platform.SWITCH,
+    Platform.BUTTON,
+    Platform.FAN,
     Platform.SENSOR,
+    Platform.SWITCH,
 ]
 
 

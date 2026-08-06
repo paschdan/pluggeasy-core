@@ -85,3 +85,4 @@ rules:
     status: exempt
     comment: This integration talks Modbus, not HTTP.
   strict-typing: todo
+  # Notes: fan (Platform.FAN) and button (Platform.BUTTON) platforms added.
