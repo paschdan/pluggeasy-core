@@ -40,6 +40,10 @@ class PluggeasyCoordinator(DataUpdateCoordinator[Pluggeasy]):
         self.device = device
 
     async def _async_update_data(self) -> Pluggeasy:
+        # Skip polling while Home Assistant is shutting down: an in-flight read
+        # would be cancelled and surface as a spurious communication error.
+        if self.hass.is_stopping:
+            return self.device
         try:
             await self.device.async_update()
         except ModbusError as err:
