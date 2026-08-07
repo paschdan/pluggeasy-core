@@ -25,7 +25,7 @@ It uses the **shared `modbus_connection` component** (`async_get_unit`) so it do
 
 - Home Assistant ≥ 2026.6.4
 - `modbus_connection` HA component (shared connection)
-- `pluggeasy-modbus==0.2.0` (PyPI, installed automatically via `requirements`)
+- `pluggeasy-modbus==0.3.0` (PyPI, installed automatically via `requirements`)
 
 ## Integration layout
 
@@ -48,7 +48,7 @@ homeassistant/components/pluggeasy/
 
 ## Device library
 
-The Modbus data model is provided by [`pluggeasy-modbus`](https://github.com/paschdan/pluggeasy-modbus) (`pluggeasy-modbus==0.2.0`). That library is transport-agnostic and takes a `ModbusUnit` from `modbus_connection`.
+The Modbus data model is provided by [`pluggeasy-modbus`](https://github.com/paschdan/pluggeasy-modbus) (`pluggeasy-modbus==0.3.0`). That library is transport-agnostic and takes a `ModbusUnit` from `modbus_connection`.
 
 ## HACS / standalone installation
 

@@ -5,12 +5,27 @@ from typing import Any, ClassVar
 from homeassistant.components.fan import FanEntity, FanEntityFeature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
-from pluggeasy_modbus import SelectedAirflow
 
 from .coordinator import PluggeasyConfigEntry, PluggeasyCoordinator
 from .entity import PluggeasyEntity
 
 _DEFAULT_PRESET = "nominal"
+
+LABEL_TO_MODE: dict[str, str] = {
+    "low": "low",
+    "medium": "medium",
+    "nominal": "high",
+    "auto": "auto",
+    "snooze": "off",
+}
+
+MODE_TO_LABEL: dict[str, str] = {
+    "off": "snooze",
+    "high": "nominal",
+    "low": "low",
+    "medium": "medium",
+    "auto": "auto",
+}
 
 
 async def async_setup_entry(
@@ -24,7 +39,7 @@ async def async_setup_entry(
 
 
 class PluggeasyFan(PluggeasyEntity, FanEntity):
-    """Primary fan entity — controls ventilation speed via selected_airflow preset."""
+    """Primary fan entity — controls ventilation speed via airflow mode preset."""
 
     _attr_name = None
     _attr_supported_features = (
@@ -41,10 +56,8 @@ class PluggeasyFan(PluggeasyEntity, FanEntity):
     @property
     def preset_mode(self) -> str | None:
         """Return the current preset mode."""
-        value = self.coordinator.device.parameters.selected_airflow
-        if value is None:
-            return None
-        return value.name.lower()
+        eff = self.coordinator.device.effective_airflow_mode()
+        return MODE_TO_LABEL.get(eff) if eff is not None else None
 
     @property
     def is_on(self) -> bool | None:
@@ -56,9 +69,8 @@ class PluggeasyFan(PluggeasyEntity, FanEntity):
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:
         """Set the ventilation speed preset."""
-        await self.coordinator.device.parameters.write(
-            "selected_airflow", SelectedAirflow[preset_mode.upper()]
-        )
+        lib_mode = LABEL_TO_MODE[preset_mode]
+        await self.coordinator.device.async_set_airflow_mode(lib_mode)
         await self.coordinator.async_request_refresh()
 
     async def async_turn_on(

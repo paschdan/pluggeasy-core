@@ -12,15 +12,20 @@
 
 | Artifact | Version | Notes |
 | :--- | :--- | :--- |
-| `pluggeasy-modbus` library | `0.2.0` | Pinned in `manifest.json` `requirements`. |
+| `pluggeasy-modbus` library | `0.3.0` | Pinned in `manifest.json` `requirements`. |
 | This integration | — | No standalone version; follows HA core release cycle. |
-| `pluggeasy-hacs` | `0.2.0` | Parallel HACS deliverable for standalone installs. |
+| `pluggeasy-hacs` | `0.6.0` | Parallel HACS deliverable for standalone installs. |
 
 ## Architecture note
 
 This integration uses the **shared-connection** model: the user configures a `modbus_connection` entry once in HA, and this integration's config flow uses `ConfigEntrySelector` to reference it. The `modbus_connection` HA component is listed in `manifest.json` `dependencies`.
 
 For a self-contained installation that owns its own Modbus TCP connection, see [`pluggeasy-hacs`](https://github.com/paschdan/pluggeasy-hacs).
+
+## What changed in 0.3.0
+
+- **`fan.py`** — Snooze/off routing fixed. `turn_off` and the `snooze` preset now route through `device.async_set_airflow_mode("off")` (sets the snooze coil) instead of writing `selected_airflow=Snooze` (which was rejected by hardware). `preset_mode` and `is_on` now derive from `device.effective_airflow_mode()`. Note: "off"/snooze on the device is a ~1-hour auto-resume; the unit will restart at the stored airflow speed after that time.
+- **`manifest.json`** — `requirements` bumped to `pluggeasy-modbus==0.3.0`.
 
 ## What changed in 0.2.0
 
