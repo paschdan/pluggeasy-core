@@ -135,7 +135,9 @@ def _enum_sensor(
 DESCRIPTIONS: tuple[PluggeasySensorDescription, ...] = (
     # --- Component 3: PluggeasyMeasurements (input registers) ---
     # Diagnostic enum sensors
-    _enum_sensor("measurements", "communication_error", "Communication Error", CommunicationError),
+    _enum_sensor(
+        "measurements", "communication_error", "Communication Error", CommunicationError
+    ),
     _enum_sensor("measurements", "defrost_status", "Defrost Status", DefrostStatus),
     # Temperatures (gauge, precision 1)
     _temp("measurements", "extract_air_temperature", "Extract Air Temperature"),
@@ -154,7 +156,12 @@ DESCRIPTIONS: tuple[PluggeasySensorDescription, ...] = (
     _rpm("rpm_extract_motor", "RPM Extract Motor"),
     _rpm("rpm_supply_motor", "RPM Supply Motor"),
     # Diagnostic enum sensor
-    _enum_sensor("measurements", "bypass_damper_position", "Bypass Damper Position", BypassDamperPosition),
+    _enum_sensor(
+        "measurements",
+        "bypass_damper_position",
+        "Bypass Damper Position",
+        BypassDamperPosition,
+    ),
     # VOC
     PluggeasySensorDescription(
         key="measurements_voc",
@@ -166,7 +173,9 @@ DESCRIPTIONS: tuple[PluggeasySensorDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
     ),
     # Diagnostic enum sensor
-    _enum_sensor("measurements", "actual_working_mode", "Actual Working Mode", ActualWorkingMode),
+    _enum_sensor(
+        "measurements", "actual_working_mode", "Actual Working Mode", ActualWorkingMode
+    ),
     # --- Component 4: PluggeasyParameters (holding registers) ---
     # Temperatures (gauge, precision 1)
     _temp("parameters", "bypass_min_outdoor_temp", "Bypass Min Outdoor Temperature"),

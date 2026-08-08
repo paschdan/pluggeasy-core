@@ -47,7 +47,13 @@ class PluggeasyFan(PluggeasyEntity, FanEntity):
         | FanEntityFeature.TURN_ON
         | FanEntityFeature.TURN_OFF
     )
-    _attr_preset_modes: ClassVar[list[str]] = ["low", "medium", "nominal", "auto", "snooze"]
+    _attr_preset_modes: ClassVar[list[str]] = [
+        "low",
+        "medium",
+        "nominal",
+        "auto",
+        "snooze",
+    ]
 
     def __init__(self, coordinator: PluggeasyCoordinator) -> None:
         """Initialize the fan."""
